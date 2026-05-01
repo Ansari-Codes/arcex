@@ -19,6 +19,6 @@ class Text(Element):
         for i, child in enumerate(self._children):
             if isinstance(child, dict):
                 if isinstance(child, dict) and "__text__" in child:
-                    child["__text__"] = text
+                    child["__text__"] = str(text)
                     return self
         return self

@@ -1,6 +1,5 @@
 from Arcex.ax import Output, Page
-from Arcex.components import Text, Button, Input, Select
-
+from Arcex.components import Text, Date, Input, Select, Textarea, Checkbox, Number
 
 class HomePage(Page):
     route = '/'
@@ -8,67 +7,33 @@ class HomePage(Page):
     favicon = "🙇‍♀️"
 
     def body(self):
+        if 'value' not in self.state:
+            self.state["value"] = ""
+        def on_text_change(val):
+            self.state["value"] = val
+            if chbox._checked:
+                text.set_text(self.state['value'])
+            else:
+                text.set_text("Enable it first!")
+            return Output().replace(text)
+        
+        textarea = Textarea(name="description", value=self.state['value'], rows=6, id="desc")
+        textarea.on("input", on_text_change)
+        
+        inp = Input(name="input", value=self.state['value'], id="input")
+        inp.on("input", on_text_change)
+        
+        slc = Select("select", ["A", "B", "C", "D"], "A", id="select")
+        slc.on(on_text_change)
+        
+        date = Date("date", id="date")
+        date.on(on_text_change)
+        
+        chbox = Checkbox("checkbox", "Do you accept?", id="check")
+        chbox.on(on_text_change)
+        
+        num = Number("number", id="number")
+        num.on('input', on_text_change)
 
-        if "count" not in self.state:
-            self.state["count"] = 0
-
-        if "name" not in self.state:
-            self.state["name"] = ""
-
-        # text display
-        t = Text(
-            f"Hello {self.state['name']} | Count: {self.state['count']}",
-            2,
-            id="text"
-        )
-
-        # button click
-        def change_text(_):
-            self.state['count'] += 1
-
-            t.set_text(
-                f"Hello {self.state['name']} | Count: {self.state['count']}"
-            )
-
-            return Output().replace(t)
-
-        # input change
-        def change_text_input(inp_val):
-            self.state["name"] = inp_val
-
-            t.set_text(
-                f"Hello {inp_val} | Count: {self.state['count']}"
-            )
-
-            return Output().replace(t)
-
-        # input field
-        inp = Input(
-            name="username",
-            value=self.state["name"],
-            id="name_input",
-        )
-        inp.onchange("enter", change_text_input)
-
-        # button
-        Button("Click", onclick=change_text, id="btn")
-
-        # dynamic event switching
-        def change_input_work(mode):
-            inp.onchange(mode, change_text_input)
-
-            return Output().replace(inp)
-
-        # select
-        slc = Select(
-            name="way",
-            options=[
-                ("Live Input", "input"),
-                ("Enter", "enter"),
-                ("Key Down", "keydown"),
-                ("Key Up", "keyup")
-            ],
-            value="enter",
-            id="way",
-        )
-        slc.onchange(change_input_work)
+        text = Text(self.state['value'], 2, id="text")
+        
