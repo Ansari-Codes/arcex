@@ -1,5 +1,5 @@
 from Arcex.ax import Output, Page, Element
-from Arcex.components import Text, Input, Select, Textarea, Checkbox, Number, Radio, Date
+from Arcex.components import Text, Input, Select, Textarea, Code, Markdown, Checkbox, Number, Radio, Date
 
 
 class HomePage(Page):
@@ -47,7 +47,6 @@ class HomePage(Page):
         # Helper to update display
         def update_display():
             status = "Accepted" if self.state["accepted"] else "Not Accepted"
-            
             display_text = f"""
                 <b>Text Input:</b> {self.state['text_value']}<br>
                 <b>Checkbox:</b> {status}<br>
@@ -64,7 +63,8 @@ class HomePage(Page):
         Element("h1", ["Live Form Integration"])
 
         with Element("div", attrs={"class": "form-container"}):
-            Element("label", ["Textarea: "])
+
+            Element("label", ["TextArea: "])
             with Element("div"):
                 textarea = Textarea(name="description", value=self.state["text_value"], rows=5, id="desc")
                 textarea.on("input", on_text_change)
