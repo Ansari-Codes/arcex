@@ -247,3 +247,64 @@ class Number(Element):
         self.attrs["value"] = str(value)
         return self
 
+class Radio(Element):
+    def __init__(self, name: str, options: list, value=None, id: str|None = None):
+        self._name = name
+        self._options = options
+        self._value = value
+        self._id = id
+
+        super().__init__(
+            _tag="div",
+            children=[],
+            id=self._id,
+            attrs={"class": "radio-group"}
+        )
+
+        self._build_radios()
+
+    def _build_radios(self):
+        self._children.clear()
+        with self:
+            for option in self._options:
+                if isinstance(option, tuple):
+                    label_text, val = option
+                else:
+                    label_text = str(option)
+                    val = option
+                radio_id = f"{self._id}_{val}" if val else f"{self._id}_{label_text}"
+                label = Element("label", [{"__text__": label_text}], attrs={"for": radio_id})
+                with label:
+                    radio_input = Element("input", attrs={
+                        "type": "radio",
+                        "name": self._name,
+                        "id": radio_id,
+                        "value": str(val)
+                    })
+                    if val == self._value:
+                        radio_input.attrs["checked"] = "checked"
+
+    def _apply_events(self):
+        for child in self._children:
+            if isinstance(child, Element) and child._tag == "label":
+                radio = [c for c in child._children if not isinstance(c, dict)][0]
+                if radio and radio._tag == "input":
+                    radio.attrs.pop("onchange", None)
+                    radio.attrs["onchange"] = f"axInputEvent(`{self._id}`, this.value, false)"
+        return self
+
+    def on(self, handler=None):
+        self._apply_events()
+        if handler:
+            register_event(self._id, _wrap_handler(self, handler), EventTypes.input)
+        return self
+
+    def set_value(self, value):
+        self._value = value
+        self._build_radios()
+        return self
+
+    def set_options(self, options: list):
+        self._options = options
+        self._build_radios()
+        return self

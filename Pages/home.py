@@ -1,5 +1,5 @@
 from Arcex.ax import Output, Page
-from Arcex.components import Text, Date, Input, Select, Textarea, Checkbox, Number
+from Arcex.components import Text, Date, Input, Select, Textarea, Checkbox, Number, Radio
 
 class HomePage(Page):
     route = '/'
@@ -34,6 +34,9 @@ class HomePage(Page):
         
         num = Number("number", id="number")
         num.on('input', on_text_change)
+        
+        rad = Radio("radios", [1, 2, 3, 4], 2, "radios")
+        rad.on(on_text_change)
 
         text = Text(self.state['value'], 2, id="text")
         
