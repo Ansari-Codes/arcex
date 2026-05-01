@@ -1,4 +1,4 @@
-from arcex.ax.Elements import Element
+from Arcex.ax.Elements import Element
 
 class Text(Element):
     def __init__(self, text, size=0, id = None):

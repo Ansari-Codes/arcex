@@ -1,5 +1,5 @@
-from arcex.ax.utils import html
-from arcex.ax.Exceptions import AXError
+from Arcex.ax.utils import html
+from Arcex.ax.Exceptions import AXError
 
 class Output:
     def __init__(self):

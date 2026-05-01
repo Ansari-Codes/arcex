@@ -1,3 +1,3 @@
-from arcex.components.Buttons import Button
-from arcex.components.Text import Text
-from arcex.components.Inputs import Input, Select, Date
+from Arcex.components.Buttons import Button
+from Arcex.components.Text import Text
+from Arcex.components.Inputs import Input, Select, Date

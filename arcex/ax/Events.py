@@ -1,5 +1,5 @@
-from arcex.ax.IO import Output
-from arcex.ax.Exceptions import AXError
+from Arcex.ax.IO import Output
+from Arcex.ax.Exceptions import AXError
 
 class EventTypes:
     click = "onclick"

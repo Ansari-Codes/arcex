@@ -1,6 +1,6 @@
-from arcex.ax.Elements import Element
-from arcex.ax.Exceptions import AXError
-from arcex.ax.Events import register_event, EventTypes
+from Arcex.ax.Elements import Element
+from Arcex.ax.Exceptions import AXError
+from Arcex.ax.Events import register_event, EventTypes
 
 class Button(Element):
     def __init__(self, text, onclick=None, id = None):

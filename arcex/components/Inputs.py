@@ -1,7 +1,7 @@
-from arcex.ax import Output
-from arcex.ax.Elements import Element
-from arcex.ax.Events import EventTypes, register_event
-from arcex.ax.Exceptions import AXError
+from Arcex.ax import Output
+from Arcex.ax.Elements import Element
+from Arcex.ax.Events import EventTypes, register_event
+from Arcex.ax.Exceptions import AXError
 
 def _wrap_handler(component, handler):
     def wrapper(value):

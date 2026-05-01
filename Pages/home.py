@@ -1,5 +1,5 @@
-from arcex.ax import Output, Page
-from arcex.components import Text, Button, Input, Select
+from Arcex.ax import Output, Page
+from Arcex.components import Text, Button, Input, Select
 
 
 class HomePage(Page):

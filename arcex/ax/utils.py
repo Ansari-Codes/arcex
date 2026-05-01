@@ -1,4 +1,4 @@
-from arcex.ax.Exceptions import AXError
+from Arcex.ax.Exceptions import AXError
 
 def html(component):
     if hasattr(component, '__html__'):
