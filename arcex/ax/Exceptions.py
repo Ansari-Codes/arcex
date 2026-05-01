@@ -1,0 +1,2 @@
+class AXError(Exception):
+    pass
