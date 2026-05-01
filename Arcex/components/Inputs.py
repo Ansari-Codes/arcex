@@ -273,7 +273,7 @@ class Radio(Element):
                     label_text = str(option)
                     val = option
                 radio_id = f"{self._id}_{val}" if val else f"{self._id}_{label_text}"
-                label = Element("label", [{"__text__": label_text}], attrs={"for": radio_id})
+                label = Element("label", [], attrs={"for": radio_id})
                 with label:
                     radio_input = Element("input", attrs={
                         "type": "radio",
@@ -283,7 +283,8 @@ class Radio(Element):
                     })
                     if val == self._value:
                         radio_input.attrs["checked"] = "checked"
-
+                label._children.append({"__text__": label_text}
+)
     def _apply_events(self):
         for child in self._children:
             if isinstance(child, Element) and child._tag == "label":
