@@ -2,7 +2,7 @@ from flask import Flask, request
 from Arcex.ax.Events import get_event, EventTypes
 from Arcex.ax.utils import html
 
-app = Flask(__name__, static_folder='Arcex/static')
+app = Flask(__name__, static_folder='static')
 app.secret_key = "secret-key"
 
 @app.route("/.event/<id>/<type>", methods=['POST', 'GET'])

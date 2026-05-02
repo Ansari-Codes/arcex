@@ -35,6 +35,7 @@ class Page(Element):
             })
             Element('link', attrs={
                 "rel": "icon",
+                "type": "image/x-icon",
                 "href": self.favicon
             })
             Element('script', attrs={"src": "/static/core/ax.js"})
