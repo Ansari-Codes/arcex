@@ -1,7 +1,6 @@
 from Arcex.ax import Output, Page, Element
 from Arcex.components import Text, Input, Select, Textarea, Code, Markdown, Checkbox, Number, Radio, Date
 
-
 class HomePage(Page):
     route = '/'
     title = 'Home'
@@ -113,3 +112,4 @@ class HomePage(Page):
 
         # Initial render
         update_display()
+        
