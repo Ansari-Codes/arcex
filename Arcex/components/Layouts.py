@@ -13,3 +13,18 @@ class Row(Element):
 class Col(Element):
     def __init__(self, children=None, id=None, attrs=None, properties=None, styles=None):
         super().__init__('col', children, id, attrs, properties, styles)
+
+class LBreak(Element):
+    def __init__(self):
+        super().__init__('br')
+
+class LHl(Element):
+    def __init__(self, children=None, id=None, attrs=None, properties=None, styles=None):
+        super().__init__('hl', children, id, attrs, properties, styles)
+
+class LVl(Element):
+    def __init__(self, children=None, id=None, attrs=None, properties=None, styles=None):
+        super().__init__('vl', children, id, attrs, properties, styles)
+
+
+
