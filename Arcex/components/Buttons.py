@@ -4,16 +4,19 @@ from Arcex.ax.Events import register_event, EventTypes
 
 class Button(Element):
     def __init__(self, text, id = None):
-        super().__init__("button", [{"__text__": text}], id, attrs={EventTypes.click: f"axEvent(`{id}`, `{EventTypes.click}`)"})
+        super().__init__("button", [{"__text__": text}], id, attrs={
+            "type": "button",
+            EventTypes.click: f"axEvent(`{id}`, `{EventTypes.click}`)"
+        })
 
     def onclick(self, handler):
-        if (handler is not None) and (id is None):
+        if (handler is not None) and (self._id is None):
             raise AXError("ID is required when passing onclick for a button!")
         def onclick_handler(e=None):
             output = handler(e)
             return output.replace(self)
-        if handler: 
-            register_event(id, onclick_handler, EventTypes.click)
+        if handler:
+            register_event(self._id, onclick_handler, EventTypes.click)
 
     def set_text(self, text: str):
         texted = False

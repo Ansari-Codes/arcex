@@ -2,7 +2,7 @@ from Arcex.ax import Output, Page, Element
 from Arcex.components import (Text, Input, 
                             Select, Textarea, 
                             Checkbox, Number, 
-                            Radio, Date)
+                            Radio, Date, Button)
 
 class HomePage(Page):
     route = '/'
@@ -99,6 +99,17 @@ class HomePage(Page):
             rad = Radio(name="radios", options=[1, 2, 3, 4, 5], 
                         value=self.state["radio_value"], id="radios")
             rad.on(on_radio_change)
+        
+        self.state['count'] = 0
+        t = Text(f"Count: {self.state['count']}", 1, id='counter-label')
+        
+        def inc(e=None):
+            self.state['count'] += 1
+            t.set_text("Count: " + self.state['count'].__str__())
+            print(self.state['count'])
+            return Output().replace(t)
+        
+        Button("Increment", "inc-btn").onclick(inc)
 
         Element("hr")
         text = Text("", 2, id="text")
