@@ -21,6 +21,14 @@ class Output:
         }
         return self
 
+    def inner_replace(self, el):
+        self._ensure_id(el)
+        self.ops[el._id] = {
+            "op": "inner_replace",
+            "html": html(el)
+        }
+        return self
+
     def remove(self, el_id):
         self.ops[el_id] = {
             "op": "remove"

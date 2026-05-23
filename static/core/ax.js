@@ -19,9 +19,12 @@ async function axEvent(eventId, eventType, payload = {}) {
 
                 case "replace":
                     if (!el) break;
-                    const temp = document.createElement("div");
-                    temp.innerHTML = data.html;
-                    el.replaceWith(temp.firstElementChild);
+                    el.outerHTML = data.html;
+                    break;
+
+                case "inner_replace":
+                    if (!el) break;
+                    el.innerHTML = data.html;
                     break;
 
                 case "add":
