@@ -14,11 +14,11 @@ def _wrap_handler(component, handler):
     return wrapper
 
 class Input(Element):
-    def __init__(self, name, input_type="text", value="", id=None):
+    def __init__(self, name, input_type="text", value="", id=None, *, attrs=None, styles=None, properties=None):
         self._value = value
         self._id = id
 
-        super().__init__("input", [], id, attrs={"name": name, "type": input_type, "value": value})
+        super().__init__("input", [], id, attrs={"name": name, "type": input_type, "value": value, **(attrs or {})}, styles=styles, properties=properties)
 
     def _apply_events(self, events):
         for k in ["oninput", "onkeydown", "onkeyup", "onkeypress"]:
@@ -48,12 +48,12 @@ class Input(Element):
         return self    
 
 class Select(Element):
-    def __init__(self, name, options, value=None, id=None):
+    def __init__(self, name, options, value=None, id=None, *, attrs=None, styles=None, properties=None):
         self._options = options
         self._value = value
         self._id = id
 
-        super().__init__("select", [], id, attrs={"name": name})
+        super().__init__("select", [], id, attrs={"name": name, **(attrs or {})}, styles=styles, properties=properties)
         self._build_options()
 
     def _build_options(self):
@@ -82,11 +82,12 @@ class Select(Element):
         return self
 
 class Date(Element):
-    def __init__(self, name, value="", id=None):
+    def __init__(self, name, value="", id=None, *, attrs=None, styles=None, properties=None):
         self._value = value
         self._id = id
 
-        super().__init__("input", [], id, attrs={"name": name, "type": "date", "value": value})
+        super().__init__("input", [], id, attrs={"name": name, "type": "date", "value": value, **(attrs or {})}
+, styles=styles, properties=properties)
 
     def on(self, handler):
         if self._id is None:
@@ -105,7 +106,7 @@ class Date(Element):
         return self
 
 class Textarea(Element):
-    def __init__(self, name: str, value: str = "", rows: int = 4, id: str|None = None):
+    def __init__(self, name: str, value: str = "", rows: int = 4, id: str|None = None, *, attrs=None, styles=None, properties=None):
         self._value = value
         self._id = id
 
@@ -113,8 +114,8 @@ class Textarea(Element):
             "textarea",
             children=[value] if value else [],
             id=self._id,
-            attrs={"name": name, "rows": rows}
-        )
+            attrs={"name": name, "rows": rows, **(attrs or {})}
+, styles=styles, properties=properties        )
 
     def _apply_events(self, events):
         for k in ["oninput", "onkeydown", "onchange"]:
@@ -153,7 +154,7 @@ class Textarea(Element):
         return self
 
 class Checkbox(Element):
-    def __init__(self, name: str, label: str = "", checked: bool = False, id: str|None = None):
+    def __init__(self, name: str, label: str = "", checked: bool = False, id: str|None = None, *, attrs=None, styles=None, properties=None):
         self._checked = bool(checked)
         
         self._label = label
@@ -166,7 +167,7 @@ class Checkbox(Element):
         )
 
         with self:
-            self._check = Element('input', attrs={"type": "checkbox", "name": name, "id": self._id})
+            self._check = Element('input', attrs={"type": "checkbox", "name": name, "id": self._id, **(attrs or {})}, styles=styles, properties=properties)
             if self._checked:
                 self._check.attrs["checked"] = "checked"
 
@@ -194,7 +195,7 @@ class Checkbox(Element):
         return self
 
 class Number(Element):
-    def __init__(self, name: str, value: int | float = 0, min=None, max=None, step=1, id: str|None = None):
+    def __init__(self, name: str, value: int | float = 0, min=None, max=None, step=1, id: str|None = None, *, attrs=None, styles=None, properties=None):
         self._value = value
         self._id = id
 
@@ -202,14 +203,14 @@ class Number(Element):
             "name": name,
             "type": "number",
             "value": str(value),
-            "step": str(step)
+            "step": str(step), **(attrs or {})
         }
         if min is not None:
             attrs["min"] = str(min)
         if max is not None:
             attrs["max"] = str(max)
 
-        super().__init__("input", [], id=self._id, attrs=attrs)
+        super().__init__("input", [], id=self._id, attrs=attrs, styles=styles, properties=properties)
 
     def _apply_events(self, events):
         for k in ["oninput", "onkeydown", "onchange"]:
@@ -248,7 +249,7 @@ class Number(Element):
         return self
 
 class Radio(Element):
-    def __init__(self, name: str, options: list, value=None, id: str|None = None):
+    def __init__(self, name: str, options: list, value=None, id: str|None = None, *, attrs=None, styles=None, properties=None):
         self._name = name
         self._options = options
         self._value = value
@@ -258,7 +259,7 @@ class Radio(Element):
             _tag="div",
             children=[],
             id=self._id,
-            attrs={"class": "radio-group"}
+            attrs={"class": "radio-group", **(attrs or {})}, styles=styles, properties=properties
         )
 
         self._build_radios()

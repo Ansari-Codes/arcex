@@ -3,11 +3,11 @@ from Arcex.ax.Exceptions import AXError
 from Arcex.ax.Events import register_event, EventTypes
 
 class Button(Element):
-    def __init__(self, text, id = None):
+    def __init__(self, text, id = None, *, styles=None, attrs=None, properties=None):
         super().__init__("button", [{"__text__": text}], id, attrs={
             "type": "button",
-            EventTypes.click: f"axEvent(`{id}`, `{EventTypes.click}`)"
-        })
+            EventTypes.click: f"axEvent(`{id}`, `{EventTypes.click}`)",
+        **(attrs or {})}, styles=styles, properties=properties)
 
     def onclick(self, handler):
         if (handler is not None) and (self._id is None):

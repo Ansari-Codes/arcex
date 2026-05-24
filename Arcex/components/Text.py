@@ -2,7 +2,7 @@ from Arcex.ax.Elements import Element
 import html as sanitizer
 
 class Text(Element):
-    def __init__(self, text, size=0, html=False, id=None):
+    def __init__(self, text, size=0, html=False, id=None, *, attrs=None, properties=None, styles=None):
         tag_map = {
             0: "p",
             1: "h1",
@@ -16,7 +16,7 @@ class Text(Element):
         tag = tag_map.get(size, "p")
         if html:safe_text = str(text)
         else:safe_text = sanitizer.escape(str(text))     
-        super().__init__(tag, [{"__text__": safe_text}], id)
+        super().__init__(tag, [{"__text__": safe_text}], id, attrs=attrs, properties=properties, styles=styles)
 
     def set_text(self, text):
         import html
