@@ -1,3 +1,5 @@
+from uuid import uuid4
+
 class Element:
     _stack = []
     SELF_CLOSING = {"meta", "link", "input", "img", "br"}
@@ -17,10 +19,8 @@ class Element:
         self.attrs = attrs or {}
         self.properties = properties or {}
         self.styles = styles or {}
-
-        if id:
-            self.attrs["id"] = id
-
+        if id is None: id = 'ax-' + uuid4().hex[:8]
+        if id: self.attrs["id"] = id
         self._id = id
 
         if Element._stack:

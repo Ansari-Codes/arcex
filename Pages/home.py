@@ -184,7 +184,6 @@ Count: {self.state['count']}
                         "placeholder": "Write something..."
                     },
                     styles=input_style,
-                    id="textarea-input"
                 )
 
                 textarea.on("input", on_text)
@@ -198,7 +197,6 @@ Count: {self.state['count']}
                         "placeholder": "Enter username..."
                     },
                     styles=input_style,
-                    id="input-input"
                 )
 
                 inp.on("input", on_text)
@@ -210,7 +208,6 @@ Count: {self.state['count']}
                     options=["A", "B", "C", "D"],
                     value=self.state["selected_option"],
                     styles=input_style,
-                    id="select-input"
                 )
 
                 slc.on(on_select)
@@ -221,7 +218,6 @@ Count: {self.state['count']}
                     name="date",
                     value=self.state["date_value"],
                     styles=input_style,
-                    id="date-input"
                 )
 
                 date.on(on_date)
@@ -234,7 +230,6 @@ Count: {self.state['count']}
                     min=0,
                     max=100,
                     styles=input_style,
-                    id="num-input"
                 )
 
                 num.on("input", on_number)
