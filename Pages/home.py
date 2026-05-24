@@ -32,41 +32,6 @@ class HomePage(Page):
             })
 
         # =========================
-        # Shared Styles
-        # =========================
-
-        input_style = {
-            "width": "100%",
-            "padding": "14px",
-            "border": "1px solid #334155",
-            "border-radius": "12px",
-            "background": "#1e293b",
-            "color": "white",
-            "font-size": "15px",
-            "margin-bottom": "18px",
-            "outline": "none",
-            "transition": "0.2s ease"
-        }
-
-        label_style = {
-            "font-size": "15px",
-            "font-weight": "600",
-            "margin-top": "15px",
-            "margin-bottom": "8px",
-            "color": "#cbd5e1",
-            "display": "block"
-        }
-
-        section_style = {
-            "background": "#111827",
-            "padding": "24px",
-            "border-radius": "18px",
-            "margin-bottom": "25px",
-            "border": "1px solid #334155",
-            "box-shadow": "0 10px 30px rgba(0,0,0,0.25)"
-        }
-
-        # =========================
         # Update Display
         # =========================
 
@@ -138,31 +103,15 @@ Count: {self.state['count']}
 
         with Element(
             "div",
-            styles={
-                "background": "#0f172a",
-                "min-height": "100vh",
-                "padding": "40px",
-                "font-family": "Inter, sans-serif",
-                "color": "white"
-            }
         ):
 
             Text(
                 "✨ Interactive Dashboard",
-                1,
-                styles={
-                    "font-size": "42px",
-                    "font-weight": "700",
-                    "margin-bottom": "10px"
-                }
+                1
             )
 
             Text(
                 "Modern UI using attrs, properties and styles",
-                styles={
-                    "color": "#94a3b8",
-                    "margin-bottom": "30px"
-                }
             )
 
             # =====================
@@ -171,10 +120,9 @@ Count: {self.state['count']}
 
             with Element(
                 "div",
-                styles=section_style
             ):
 
-                Text("📝 Description", styles=label_style)
+                Text("📝 Description")
 
                 textarea = Textarea(
                     name="description",
@@ -183,12 +131,11 @@ Count: {self.state['count']}
                     attrs={
                         "placeholder": "Write something..."
                     },
-                    styles=input_style,
                 )
 
                 textarea.on("input", on_text)
 
-                Text("👤 Username", styles=label_style)
+                Text("👤 Username")
 
                 inp = Input(
                     name="username",
@@ -196,54 +143,46 @@ Count: {self.state['count']}
                     attrs={
                         "placeholder": "Enter username..."
                     },
-                    styles=input_style,
                 )
 
                 inp.on("input", on_text)
 
-                Text("🎯 Select Option", styles=label_style)
+                Text("🎯 Select Option")
 
                 slc = Select(
                     name="choice",
                     options=["A", "B", "C", "D"],
                     value=self.state["selected_option"],
-                    styles=input_style,
                 )
 
                 slc.on(on_select)
 
-                Text("📅 Select Date", styles=label_style)
+                Text("📅 Select Date")
 
                 date = Date(
                     name="date",
                     value=self.state["date_value"],
-                    styles=input_style,
                 )
 
                 date.on(on_date)
 
-                Text("🔢 Number", styles=label_style)
+                Text("🔢 Number")
 
                 num = Number(
                     name="quantity",
                     value=self.state["number_value"],
                     min=0,
                     max=100,
-                    styles=input_style,
                 )
 
                 num.on("input", on_number)
 
-                Text("📻 Radio", styles=label_style)
+                Text("📻 Radio")
 
                 radio = Radio(
                     name="radio",
                     options=[1, 2, 3, 4, 5],
                     value=self.state["radio_value"],
-                    styles={
-                        "margin-bottom": "20px"
-                    },
-                    id="radio-input"
                 )
 
                 radio.on(on_radio)
@@ -255,11 +194,6 @@ Count: {self.state['count']}
                     properties={
                         "required": True
                     },
-                    styles={
-                        "margin-top": "10px",
-                        "margin-bottom": "20px"
-                    },
-                    id="checkbox-input"
                 )
 
                 check.on(on_check)
@@ -270,35 +204,15 @@ Count: {self.state['count']}
 
             with Element(
                 "div",
-                styles=section_style
             ):
 
                 counter_text = Text(
                     f"🔥 Counter: {self.state['count']}",
                     2,
-                    styles={
-                        "font-size": "28px",
-                        "font-weight": "700",
-                        "color": "#facc15",
-                        "margin-bottom": "20px"
-                    },
-                    id="text-inp"
                 )
 
                 btn = Button(
                     "Increment",
-                    "inc-btn",
-                    styles={
-                        "background": "linear-gradient(135deg,#3b82f6,#2563eb)",
-                        "color": "white",
-                        "padding": "14px 22px",
-                        "border": "none",
-                        "border-radius": "14px",
-                        "cursor": "pointer",
-                        "font-size": "16px",
-                        "font-weight": "600",
-                        "transition": "0.2s ease"
-                    },
                     attrs={
                         "title": "Increase counter"
                     }
@@ -312,30 +226,15 @@ Count: {self.state['count']}
 
             with Element(
                 "div",
-                styles=section_style
             ):
 
                 Text(
                     "📦 Live State",
                     2,
-                    styles={
-                        "margin-bottom": "15px",
-                        "color": "#60a5fa"
-                    },
                 )
 
                 display = Text(
                     "",
-                    styles={
-                        "white-space": "pre-wrap",
-                        "font-family": "monospace",
-                        "background": "#020617",
-                        "padding": "18px",
-                        "border-radius": "14px",
-                        "line-height": "1.8",
-                        "color": "#93c5fd"
-                    },
-                    id="display-text"
                 )
 
         update_display()

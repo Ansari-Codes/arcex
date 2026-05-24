@@ -1,12 +1,14 @@
 from Arcex.ax.Elements import Element
 from Arcex.ax.Exceptions import AXError
 from Arcex.ax.Events import register_event, EventTypes
+from uuid import uuid4
 
 class Button(Element):
-    def __init__(self, text, id = None, *, styles=None, attrs=None, properties=None):
-        super().__init__("button", [{"__text__": text}], id, attrs={
+    def __init__(self, text, *, id = None, styles=None, attrs=None, properties=None):
+        id = id if id is not None else uuid4().hex[0:8]
+        super().__init__("button", [{"__text__": text}], f'ax-{id}', attrs={
             "type": "button",
-            EventTypes.click: f"axEvent(`{id}`, `{EventTypes.click}`)",
+            EventTypes.click: f"axEvent(`ax-{id}`, `{EventTypes.click}`)",
         **(attrs or {})}, styles=styles, properties=properties)
 
     def onclick(self, handler):
